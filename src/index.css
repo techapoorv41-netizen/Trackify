@@ -1,0 +1,118 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --page: 245 247 251;
+  --card: 255 255 255;
+  --soft: 241 245 249;
+  --ink: 23 43 77;
+  --muted: 100 116 139;
+  --line: 226 232 240;
+  --sidebar: 15 42 74;
+  --navy: 22 59 101;
+  --brand: 36 91 145;
+  --accent: 59 130 246;
+  --accent-50: 239 246 255;
+  --accent-100: 219 234 254;
+  --success: 22 163 74;
+  --success-50: 240 253 244;
+  --success-100: 220 252 231;
+  --warning: 217 119 6;
+  --warning-50: 255 251 235;
+  --warning-100: 254 243 199;
+  --danger: 220 38 38;
+  --danger-50: 254 242 242;
+  --danger-100: 254 226 226;
+  color-scheme: light;
+}
+
+.dark {
+  --page: 11 18 32;
+  --card: 17 27 46;
+  --soft: 24 37 61;
+  --ink: 226 232 240;
+  --muted: 148 163 184;
+  --line: 38 52 78;
+  --sidebar: 9 20 38;
+  --navy: 59 110 170;
+  --brand: 110 160 215;
+  --accent: 96 165 250;
+  --accent-50: 23 37 66;
+  --accent-100: 30 58 100;
+  --success: 74 222 128;
+  --success-50: 20 50 36;
+  --success-100: 22 66 44;
+  --warning: 251 191 36;
+  --warning-50: 52 40 15;
+  --warning-100: 70 52 14;
+  --danger: 248 113 113;
+  --danger-50: 58 25 30;
+  --danger-100: 78 30 36;
+  color-scheme: dark;
+}
+
+@layer base {
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    @apply bg-page text-ink font-sans antialiased;
+    overflow-x: hidden;
+  }
+  h1, h2, h3, h4 { @apply text-ink; }
+  :focus-visible { @apply outline-none ring-2 ring-accent/60 ring-offset-2 ring-offset-card; }
+  ::selection { background: rgb(var(--accent) / 0.25); }
+}
+
+@layer components {
+  .card { @apply bg-card border border-line rounded-xl shadow-card; }
+  .card-pad { @apply p-5; }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 rounded-lg px-4 py-2 text-sm font-semibold
+      transition-colors disabled:opacity-50 disabled:cursor-not-allowed whitespace-nowrap select-none;
+  }
+  .btn-sm { @apply px-3 py-1.5 text-xs; }
+  .btn-primary { @apply bg-navy text-white hover:bg-brand; }
+  .btn-accent { @apply bg-accent text-white hover:opacity-90; }
+  .btn-secondary { @apply bg-card text-ink border border-line hover:bg-soft; }
+  .btn-ghost { @apply text-muted hover:bg-soft hover:text-ink; }
+  .btn-danger { @apply bg-danger text-white hover:opacity-90; }
+  .btn-success { @apply bg-success text-white hover:opacity-90; }
+
+  .label { @apply block text-sm font-medium text-ink mb-1.5; }
+  .input {
+    @apply w-full rounded-lg border border-line bg-card px-3 py-2 text-sm text-ink placeholder:text-muted/70
+      transition-shadow focus:outline-none focus:ring-2 focus:ring-accent/40 focus:border-accent disabled:bg-soft disabled:cursor-not-allowed;
+  }
+  .input-error { @apply border-danger focus:ring-danger/30 focus:border-danger; }
+  .field-error { @apply mt-1.5 text-xs font-medium text-danger; }
+  .hint { @apply mt-1.5 text-xs text-muted; }
+
+  .th { @apply px-4 py-3 text-left text-xs font-semibold uppercase tracking-wide text-muted whitespace-nowrap; }
+  .td { @apply px-4 py-3 text-sm text-ink align-middle; }
+
+  .nav-link {
+    @apply flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium text-white/70 transition-colors
+      hover:bg-white/10 hover:text-white;
+  }
+  .nav-link-active { @apply bg-white/15 text-white; }
+}
+
+/* Recharts theming through CSS variables (works in light and dark) */
+.recharts-cartesian-grid line { stroke: rgb(var(--line)); }
+.recharts-text, .recharts-legend-item-text { fill: rgb(var(--muted)); }
+.recharts-legend-item-text { color: rgb(var(--muted)) !important; font-size: 12px; }
+.recharts-default-tooltip {
+  background: rgb(var(--card)) !important;
+  border: 1px solid rgb(var(--line)) !important;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px -8px rgba(23, 43, 77, 0.25);
+}
+.recharts-tooltip-label { color: rgb(var(--ink)) !important; font-weight: 600; }
+
+.scroll-thin::-webkit-scrollbar { height: 8px; width: 8px; }
+.scroll-thin::-webkit-scrollbar-thumb { background: rgb(var(--line)); border-radius: 8px; }
+
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
